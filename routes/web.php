@@ -6,8 +6,8 @@ use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PenumpangController;
-
-
+use App\Http\Controllers\PesanController;
+use App\Http\Controllers\ProfileController;
 
 
 /*
@@ -34,7 +34,8 @@ Route::get('/tentang', [PenggunaController::class,'tentang']);
 Route::get('/jadwal', [PenggunaController::class,'jadwal']);
 Route::get('/lokasi', [PenggunaController::class,'lokasi']);
 Route::get('/galeri', [PenggunaController::class,'galeri']);
-
+Route::get('/pesan', [PesanController::class,'index'])->name('pemesanan');
+Route::post('/booking', [PesanController::class,'store']);
 
 // Route::get('berita', 'InformasiController@index');
 
@@ -42,3 +43,4 @@ Route::resource('kendaraans', KendaraanController::class);
 Route::resource('informasis', InformasiController::class);
 Route::resource('beritas', BeritaController::class);
 Route::resource('penumpangs', PenumpangController::class);
+Route::resource('profiles', ProfileController::class);

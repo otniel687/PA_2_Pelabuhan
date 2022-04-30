@@ -22,6 +22,7 @@
                 <form action="{{ route('kendaraans.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                 
+                    
                     <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -68,7 +69,7 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>No Polisi:</strong>
-                                    <input type="number" name="no_polisi" class="form-control" placeholder="Cost">
+                                    <input type="text" name="no_polisi" class="form-control" placeholder="Cost">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

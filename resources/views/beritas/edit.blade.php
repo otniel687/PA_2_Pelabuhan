@@ -36,6 +36,15 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Tanggal Dibuat :</strong>
+                <input type="date" name="tgl_berita" class="form-control" value="{{ $berita->tgl_berita }}">
+               @error('title')
+                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+               @enderror
+            </div>
+        </div>  
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Post Description:</strong>
                     <textarea class="form-control" style="height:150px" name="description" placeholder="Post Description">{{ $berita->description }}</textarea>

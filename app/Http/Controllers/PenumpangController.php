@@ -69,7 +69,7 @@ class PenumpangController extends Controller
      */
     public function edit(Penumpang $penumpang)
     {
-        return view('penumpangs.show', compact('penumpang'));
+        return view('penumpangs.edit', compact('penumpang'));
     }
 
     /**

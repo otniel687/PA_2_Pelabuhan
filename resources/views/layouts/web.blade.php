@@ -77,7 +77,7 @@
                   <a class="nav-link" href="{{asset('/galeri')}}">Galeri</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link btn btn-info" href="{{asset('#')}}">Masuk</a>
+                  <a class="nav-link btn btn-info" href="{{ route('login') }}">Masuk</a>
                 </li>
               </ul>
             </div>
@@ -122,7 +122,7 @@
       </section>
 
       @yield('content')
-    
+
     </main>
     <!-- JavaScript Files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>

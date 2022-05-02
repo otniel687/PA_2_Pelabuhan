@@ -19,7 +19,7 @@
    
     <div class="card shadow p-4">
             <div class="table-responsive">
-                <table class="table " id="dataTable" width="100%" cellspacing="0">
+                <table class="table " id="dataTable example" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                     <th>No</th>

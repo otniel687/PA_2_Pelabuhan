@@ -38,24 +38,15 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'image1' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'content1' => 'required',
-            'image2' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'content2' => ''
+          'title' => 'required',
+        'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        'content' => 'required'
         ]);
-        $path1 = $request->file('image1')->store('public/images');
-        $path2 = $request->file('image2')->store('public/images');
-        if(empty($image2))
-            return true;
-            else 
-            return false;
+        $path = $request->file('image')->store('public/images');
         $profile = new Profile();
         $profile->title = $request->title;
-        $profile->content1 = $request->content1;
-        $profile->content2 = $request->content2;
-        $profile->image1 = $path1;
-        $profile->image2 = $path2;
+        $profile->content = $request->content;
+        $profile->image = $path;
         $profile->save();
     
         return redirect()->route('profiles.index')
@@ -95,26 +86,20 @@ class ProfileController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'image1' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'content1' => 'required',
-            'image2' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'content2' => ''
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'content' => 'required'
         ]);
         
         $profile = Profile::find($id);
         if($request->hasFile('image')){
             $request->validate([
-              'image1' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            ]);
-            $request->validate([
-              'image2' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+              'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             ]);
             $path = $request->file('image')->store('public/images');
             $profile->image = $path;
         }
         $profile->title = $request->title;
-        $profile->content1 = $request->content1;
-        $profile->content2 = $request->content2;
+        $profile->content = $request->content;
         $profile->save();
     
         return redirect()->route('profiles.index')

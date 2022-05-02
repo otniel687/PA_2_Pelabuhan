@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Daftar Kendaraan | Admin')
-@section('judul', 'Data  Kendaraan')
+@section('title', 'Profil Website | Admin')
+@section('judul', 'Data  Website')
 @section('content')
     <div class="container mt-2">
 <div class="row">
@@ -20,17 +20,15 @@
     <table class="table ">
         <tr>
             <th>No</th>
-            <th>Image1</th>
-            <th>Image2</th>
+            <th>Gambar</th>
             <th>Title</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($profiles as $profile)
         <tr>
             <td>{{ $profile->id }}</td>
-            <td>{{ $profile->title }}</td>
             <td><img src="{{ Storage::url($profile->image1) }}" height="75" width="75" alt="" /></td>
-            <td><img src="{{ Storage::url($profile->image2) }}" height="75" width="75" alt="" /></td>
+            <td>{{ $profile->title }}</td>
             <td>
                 <form action="{{ route('profiles.destroy',$profile->id) }}" method="POST">
     

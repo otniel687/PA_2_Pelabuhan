@@ -37,8 +37,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Gambar:</strong>
-                 <input type="file" name="image1" id="image1" class="form-control" placeholder="Post Title">
-                @error('image1')
+                 <input type="file" name="image" id="image" class="form-control" placeholder="Post Title">
+                @error('image')
                   <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                @enderror
             </div>
@@ -46,30 +46,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Isi Content :</strong>
-                <textarea class="form-control" style="height:150px" name="content1" placeholder="Post content" cols="60" rows="16"></textarea>
-                @error('content1')
+                <textarea class="form-control" style="height:150px" name="content" placeholder="Post content" cols="60" rows="16"></textarea>
+                @error('content')
                   <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                 @enderror
-            </div>
-        </div> 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Gambar:</strong>
-                 <input type="file" name="image2" id="image2" class="form-control" placeholder="Post Title">
-                @error('image2')
-                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-               @enderror
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Isi Content :</strong>
-                <textarea class="form-control" style="height:150px" name="content2" placeholder="Post content" cols="60" rows="16"></textarea>
-                @error('content2')
-                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                @enderror
-            </div>
-        </div> 
         <button type="submit" class="btn btn-primary ml-3">Submit</button>
     </div>
    

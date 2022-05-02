@@ -16,10 +16,8 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('image1');
-            $table->text('content1');
-            $table->string('image2');
-            $table->text('content2');
+            $table->string('image');
+            $table->text('content');
             $table->timestamps();
         });
     }

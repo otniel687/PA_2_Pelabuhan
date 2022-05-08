@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title')</title>
     <!-- Font Awesome -->
     <link href="{{asset('../vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css" />
@@ -26,6 +29,12 @@
     <script type="text/javascript" src="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css"> --}}
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   </head>
   <body id="page-top">
     <div id="wrapper">
@@ -36,7 +45,17 @@
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fa-solid fa-user-large"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">Admin</div>
+          @if(auth()->user()->status=="admin")
+            <div class="sidebar-brand-text mx-3">Admin</div>
+          @endif
+
+          @if(auth()->user()->status=="petugas")
+            <div class="sidebar-brand-text mx-3">Petugas</div>
+          @endif
+
+          @if(auth()->user()->status=="pengguna")
+            <div class="sidebar-brand-text mx-3">Pengguna</div>
+          @endif
         </a>
 
         <!-- Divider -->
@@ -44,10 +63,9 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a
-          >
+            <span>Dashboard</span></a>
         </li>
 
         <!-- Divider -->
@@ -58,7 +76,7 @@
 
         <!-- Nav Item - Profil-->
         <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="{{ route('profil') }}">
             <i class="fa-solid fa-circle-user"></i>
             <span>Profil</span>
           </a>
@@ -66,7 +84,7 @@
 
         <!-- Nav Item -Jadwal-->
         <li class="nav-item">
-          <a class="nav-link" href="{{asset('/kendaraans')}}">
+          <a class="nav-link" href="{{ route('kendaraan') }}">
             <i class="fa-solid fa-calendar-days"></i>
             <span>Kendaraan</span></a
           >
@@ -74,7 +92,7 @@
 
         <!-- Nav Item -  Penumpang-->
         <li class="nav-item">
-          <a class="nav-link" href="{{asset('/penumpangs')}}">
+          <a class="nav-link" href="{{ route('penumpang') }}">
             <i class="fa-solid fa-clipboard-list"></i>
             <span>Penumpang</span></a
           >
@@ -82,7 +100,7 @@
 
         <!-- Nav Item - Pages Informasi -->
         <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <a class="nav-link collapsed" href="{{ route('informasi') }}" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="fa-solid fa-newspaper"></i>
             <span>Informasi</span>
           </a>
@@ -145,13 +163,49 @@
             </ul>
 
             <!-- Navbar Search-->
-            <ul class="navbar-nav ml-auto">
+            <!-- <ul class="navbar-nav ml-auto"> -->
               <!-- Nav Item - User Information -->
-              <li class="nav-item dropdown no-arrow mt-3">
+              <!-- <li class="nav-item dropdown no-arrow mt-3"> -->
                 <!-- Dropdown - User Information -->
-                <a class="dropdown-item text-info" href="#" data-toggle="modal" data-target="#logoutModal"> Logout </a>
+                <!-- <a class="dropdown-item text-info" href="#" data-toggle="modal" data-target="#logoutModal"> Logout </a>
               </li>
-            </ul>
+            </ul> -->
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
           </nav>
           <!-- End of Topbar -->
 

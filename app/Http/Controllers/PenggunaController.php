@@ -35,4 +35,12 @@ class PenggunaController extends Controller
     {
         return view('content.galeri');
     }
+    public function tabel()
+    {
+        return view('content.tabel');
+    }
+    public function isi()
+    {
+        return view('content.isiberita');
+    }
 }

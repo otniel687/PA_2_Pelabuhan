@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adm')
 {{-- @section('content')
      <div class="container judul">
       <h2>&nbsp;Booking Service</h2>
@@ -152,11 +152,16 @@
         </style>
     </head>
     <body>
+      @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
         <div class="container">
             <div class="row">
                 <div class="col"></div>
                 <div class="col-md-8">
-                    <form action="/booking" method="POST">
+                    <form action="{{ route('kendaraans.store') }}" method="POST">
                       @csrf
                       <div class="container">
                           <fieldset>
@@ -245,31 +250,27 @@
                                   </div>
                                   <div class="col"></div>
                               </div>
-                              <div class="form-row" >
-                                  
-                                  <div class="col">
-                                    <input type="text" class="form-control" name="nama[]" placeholder="Nama">
-                                  </div>
-                                  <div class="col">
-                                      <input type="text" class="form-control" name="jk[]" placeholder="Nama">
-                                  </div>
-                                  <div class="col">
-                                      <input type="text" class="form-control" name="umur[]" placeholder="Jenis Kelamain">
-                                  </div>
-                                  <div class="col">
-                                      <input type="text" class="form-control" name="alamat[]" placeholder="Umur">
-                                  </div>
-                                  <div class="col">
-                                      <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa fa-plus"></i></button></td>
-                                      {{-- <a class="btn btn-success" href="javascript:void(0);" id="add_button" title="Add field">TAMBAH</a> --}}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="form-row mt-5">
-                              <div class="col">
-                                  <button type="submit" id='submit' name="submit" class="btn btn-primary " value="Save">Save the form data</button>
-                              </div>
-                          </div>
+                              <table class="table table-bordered" id="dynamicAddRemove">
+                <tr>
+                    <th>Nama</th>
+                    <th>Content</th>
+                    <th>Umur</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="addMoreInputFields[0][nama]" placeholder="Enter " class="form-control" />
+                    </td>
+                    <td><input type="text" name="addMoreInputFields[0][jk]" placeholder="Enter " class="form-control" />
+                    </td>
+                    <td><input type="text" name="addMoreInputFields[0][umur]" placeholder="Enter " class="form-control" />
+                    </td>
+                    <td><input type="text" name="addMoreInputFields[0][alamat]" placeholder="Enter " class="form-control" />
+                    </td>
+                    <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Add </button></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-outline-success btn-block">Save</button>
                           </fieldset>
                       </div>
                     </form>
@@ -278,51 +279,24 @@
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-        <script>
-          $(document).ready(function(){
-              var maxField = 10; //Input fields increment limitation
-              var addButton = $('#add_button'); //Add button selector
-              var wrapper = $('.field_wrapper'); //Input field wrapper
-              var fieldHTML = '<div class="form-group add"><div class="row">';
-              fieldHTML=fieldHTML + '<div class="col-md-10"><input type="text" class="form-control" name="nama[]" placeholder="Nama"></div>';
-              fieldHTML=fieldHTML + '<div class="col-md-10"><input type="text" class="form-control" name="jk[]" ></div>';
-              fieldHTML=fieldHTML + '<div class="col-md-10"><input type="text" class="form-control" name="umur[]" ></div>';
-              fieldHTML=fieldHTML + '<div class="col-md-10"><input type="text" class="form-control" name="alamat[]" ></div>';
-              fieldHTML=fieldHTML + '<div class="col-md-2"><a href="javascript:void(0);" class="remove_button btn btn-danger">HAPUS</a></div>';
-              fieldHTML=fieldHTML + '</div></div>'; 
-              var x = 1; //Initial field counter is 1
-              
-              //Once add button is clicked
-              $(addButton).click(function(){
-                  //Check maximum number of input fields
-                  if(x < maxField){ 
-                      x++; //Increment field counter
-                      $(wrapper).append(fieldHTML); //Add field html
-                  }
-              });
-              
-              //Once remove button is clicked
-              $(wrapper).on('click', '.remove_button', function(e){
-                  e.preventDefault();
-                  $(this).parent('').parent('').remove(); //Remove field html
-                  x--; //Decrement field counter
-              });
-          });
-
-            $(document).ready(function () {
-                var i = 1;
-                $('#add').click(function () {
-                    i++;
-                    $('#dynamic_field').append('<div class="form-row" id="row' + i + '"> <div class="col"><input type="text" class="form-control" name="nama[]"> </div> <div class="col"> <input type="text" class="form-control" name="jk[]"> </div> <div class="col"> <input type="text" class="form-control" name="umur[]"> </div> <div class="col"> <input type="text" class="form-control" name="alamat[]"> </div> <div class="col"> <td><button type="button" name="add" class="btn btn-danger btn_remove" id="' + i + '"><i class="fa fa fa-trash"></i></button></td> </div> </div>');
-                });
-                $(document).on('click', '.btn_remove', function () {
-                    var button_id = $(this).attr("id");
-
-                    $('#row' + button_id + '').remove();
-                });
-            });
-        </script>
+        <!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    var i = 0;
+    $("#dynamic-ar").click(function () {
+        ++i;
+        $("#dynamicAddRemove").append('<tr><td><input type="text" name="addMoreInputFields[' + i +
+            '][nama]" placeholder="Enter " class="form-control" /></td><td><input type="text" name="addMoreInputFields[' + i +
+            '][jk]" placeholder="Enter " class="form-control" /></td><td><input type="text" name="addMoreInputFields[' + i +
+            '][umur]" placeholder="Enter " class="form-control" /></td><td><input type="text" name="addMoreInputFields[' + i +
+            '][alamat]" placeholder="Enter " class="form-control" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Delete</button></td></tr>'
+            );
+    });
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+</script>
 
     </body>
 </html>

@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.adm')
 @section('title', 'Profil Website | Admin')
 @section('judul', 'Data  Website')
 @section('content')
-    <div class="container mt-2">
-<div class="row">
+<div class="container mt-2">
+    <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-right mb-2">
                 <a class="btn btn-success" href="{{ route('profiles.create') }}"> Create New Post</a>

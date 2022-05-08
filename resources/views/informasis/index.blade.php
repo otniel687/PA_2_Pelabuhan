@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adm')
 @section('title', 'Daftar Kendaraan | Admin')
 @section('judul', 'Data  Kendaraan')
 @section('content')
@@ -19,7 +19,7 @@
    
     <div class="card shadow p-4">
             <div class="table-responsive">
-                <table class="table " id="dataTable example" width="100%" cellspacing="0">
+                <table id="example1" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                     <th>No</th>
@@ -54,4 +54,22 @@
             </div>
         </div>
 </div>
+<script>
+  $(function () {
+    $("#format").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#format_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
 @endsection

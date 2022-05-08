@@ -102,14 +102,6 @@
           </a>
         </li>
 
-        <!-- Nav Item -  -->
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fa-solid fa-link"></i>
-            <span>Link</span>
-          </a>
-        </li>
-
         <!-- Nav Item -  Back Up-->
         <li class="nav-item">
           <a class="nav-link" href="charts.html">
@@ -302,7 +294,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="{{route('logout')}}">Logout</a>
           </div>
         </div>
       </div>

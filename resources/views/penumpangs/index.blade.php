@@ -1,6 +1,6 @@
-@extends('layouts.app')
-@section('title', 'Daftar Kendaraan | Admin')
-@section('judul', 'Data  Kendaraan')
+@extends('layouts.adm')
+@section('title', 'Daftar Penumpang | Admin')
+@section('judul', 'Data  Penumpang')
 @section('content')
     <div class="container mt-2">
     <div class="row">
@@ -16,38 +16,48 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-   
-    <table class="table table-bordered table-responsive-lg">
-        <tr>
-            <th>No</th>
-            <th>Name</th>
-            <th>Jenis Kelamin</th>
-            <th>Umur</th>
-            <th>alamat</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($penumpangs as $penumpang)
-            <tr>
-                <td>{{ $penumpang->id }}</td>
-                <td>{{ $penumpang->nama }}</td>
-                <td>{{ $penumpang->jk }}</td>
-                <td>{{ $penumpang->umur }}</td>
-                <td>{{ $penumpang->alamat }}</td>
-                <td>
-                    <form action="{{ route('penumpangs.destroy', $penumpang->id) }}" method="POST">
+    
+    <section class="content">
+        <div class="card shadow p-4">
+            <div class="table-responsive">
+                <table id="data" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Umur</th>
+                            <th>alamat</th>
+                            <th width="120px">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($penumpangs as $penumpang)
+                            <tr>
+                                <td>{{ $penumpang->id }}</td>
+                                <td>{{ $penumpang->nama }}</td>
+                                <td>{{ $penumpang->jk }}</td>
+                                <td>{{ $penumpang->umur }}</td>
+                                <td>{{ $penumpang->alamat }}</td>
+                                <td>
+                                    <form action="{{ route('penumpangs.destroy', $penumpang->id) }}" method="POST">
 
-                        <a class="btn btn-primary" href="{{ route('penumpangs.edit',$penumpang->id) }}">Edit</a>
+                                        <a class="btn btn-primary" href="{{ route('penumpangs.edit',$penumpang->id) }}">Edit</a>
 
-                        @csrf
-                        @method('DELETE')
+                                        @csrf
+                                        @method('DELETE')
 
-                         <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </table>
-
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
     {!! $penumpangs->links() !!}
 </div>
 @endsection

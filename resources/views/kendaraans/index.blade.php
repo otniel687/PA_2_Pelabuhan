@@ -1,25 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.adm')
 @section('title', 'Daftar Kendaraan | Admin')
 @section('judul', 'Data  Kendaraan')
 @section('content')
-    <div class="container mt-2">
-        <div class="row">
-                <div class="col-lg-12 margin-tb">
-                    <div class="pull-right mb-2">
-                        <a class="btn btn-success" href="{{ route('kendaraans.create') }}"> Create New Post</a>
-                    </div>
-                </div>
+<div class="container mt-2">
+<div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-right mb-2">
+                <a class="btn btn-success" href="{{ route('kendaraans.create') }}"> Create New Post</a>
             </div>
-        
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
+        </div>
+    </div>
 
-        <div class="card shadow p-4">
-            <div class="table-responsive">
-                <table class="table " id="dataTable" width="100%" cellspacing="0">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
+<section class="content">
+    <div class="card shadow p-4">
+        <div class="table-responsive">
+            <table id="data" class="table table-striped">
                 <thead>
                     <tr>
                     <th>No</th>
@@ -54,9 +55,28 @@
                     </tr>
                     @endforeach
                 </tbody>
-                </table>
-            </div>
+            </table>
         </div>
-        {!! $kendaraans->links() !!}
     </div>
+</section>
+
+<script>
+  $(function () {
+    $("#data").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#data_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+{!! $kendaraans->links() !!}
+</div>
 @endsection

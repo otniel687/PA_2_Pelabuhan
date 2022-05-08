@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
     <!-- Favicons -->
     <link href="" rel="icon" />
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,13 +21,15 @@
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
     <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+    {{-- <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" /> --}}
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" /> --}}
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="assets/css/variables.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="css/ces.css" />
     <!--Css style-->
     <link rel="stylesheet" href="css/style.css" />
     <style>
@@ -77,7 +79,7 @@
                   <a class="nav-link" href="{{asset('/galeri')}}">Galeri</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link btn btn-info" href="{{asset('#')}}">Masuk</a>
+                  <a class="nav-link btn btn-info" href="#">Masuk</a>
                 </li>
               </ul>
             </div>
@@ -122,7 +124,7 @@
       </section>
 
       @yield('content')
-    
+
     </main>
     <!-- JavaScript Files -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>

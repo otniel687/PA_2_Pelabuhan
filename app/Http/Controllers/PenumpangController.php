@@ -14,9 +14,10 @@ class PenumpangController extends Controller
      */
     public function index()
     {
-        $data['penumpangs'] = Penumpang::orderBy('id','desc')->paginate(5);
+        $data['penumpangs'] = Penumpang::orderBy('id','desc')->simplePaginate(5);
     
-        return view('penumpangs.index', $data);
+        return view('penumpangs.index', $data)
+            ->with('i',(request()->input('page',1) - 1) * 5);
     }
 
     /**
@@ -47,7 +48,7 @@ class PenumpangController extends Controller
         Penumpang::create($request->all());
 
         return redirect()->route('penumpangs.index')
-            ->with('success', 'Penumpang created successfully.');
+            ->with('success', 'Data penumpang telah dibuat');
     }
 
     /**
@@ -90,7 +91,7 @@ class PenumpangController extends Controller
         $penumpang->update($request->all());
 
         return redirect()->route('penumpangs.index')
-            ->with('success', 'Penumpang updated successfully');
+            ->with('success', 'Data penumpang telah diubah.');
     }
 
     /**
@@ -104,6 +105,6 @@ class PenumpangController extends Controller
         $penumpang->delete();
 
         return redirect()->route('penumpangs.index')
-            ->with('success', 'Project deleted successfully');
+            ->with('success', 'Data penumpang telah dihapus.');
     }
 }

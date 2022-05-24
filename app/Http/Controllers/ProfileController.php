@@ -14,9 +14,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $data['profiles'] = Profile::orderBy('id','desc')->paginate(5);
+        $data['profiles'] = Profile::orderBy('id','desc')->simplePaginate(5);
     
-        return view('profiles.index', $data);
+        return view('profiles.index', $data)
+            ->with('i',(request()->input('page',1) - 1) * 5);
     }
 
     /**
@@ -39,7 +40,7 @@ class ProfileController extends Controller
     {
         $request->validate([
           'title' => 'required',
-        'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:20048',
         'content' => 'required'
         ]);
         $path = $request->file('image')->store('public/images');
@@ -50,7 +51,7 @@ class ProfileController extends Controller
         $profile->save();
     
         return redirect()->route('profiles.index')
-                        ->with('success','Post has been created successfully.');
+                        ->with('success','Data profile telah dibuat.');
     }
 
     /**
@@ -86,14 +87,12 @@ class ProfileController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'content' => 'required'
         ]);
         
         $profile = Profile::find($id);
         if($request->hasFile('image')){
             $request->validate([
-              'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+              'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:20048',
             ]);
             $path = $request->file('image')->store('public/images');
             $profile->image = $path;
@@ -103,7 +102,7 @@ class ProfileController extends Controller
         $profile->save();
     
         return redirect()->route('profiles.index')
-                        ->with('success','Post updated successfully');
+                        ->with('success','Data profile telah diubah.');
     }
 
     /**
@@ -117,6 +116,6 @@ class ProfileController extends Controller
         $profile->delete();
     
         return redirect()->route('profiles.index')
-                        ->with('success','profile has been deleted successfully');
+                        ->with('success','Data profile telah dihapus.');
     }
 }
